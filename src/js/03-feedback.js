@@ -1,18 +1,5 @@
+import { saveToLS, loadFormLS } from './helpers.js';
 const throttle = require('lodash.throttle');
-
-function saveToLS(key, value) {
-  const json = JSON.stringify(value);
-  localStorage.setItem(key, json);
-}
-
-function loadFormLS(key) {
-  const data = localStorage.getItem(key);
-  try {
-    return JSON.parse(data);
-  } catch {
-    return data;
-  }
-}
 
 const refs = {
   formElem: document.querySelector('.feedback-form'),
@@ -20,7 +7,7 @@ const refs = {
 
 refs.formElem.addEventListener('submit', e => {
   e.preventDefault();
-  localStorage.removeItem('formData');
+  localStorage.removeItem('feedback-form-state');
   console.log(formData);
   formData = {};
   refs.formElem.reset();
